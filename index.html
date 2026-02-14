@@ -1,0 +1,371 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filterscripts SA-MP</title>  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">  <style>
+    :root {
+      --bg: #0e0a06;
+      --card: #1a120a;
+      --primary: #ff9f1c;
+      --secondary: #ff6a00;
+      --accent: #ffd199;
+      --text: #f5f5f5;
+      --muted: #c2b8ad;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: radial-gradient(circle at top, #1b1208 0%, var(--bg) 65%);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    .channel-banner {
+      max-width: 1000px;
+      height: 300px;
+      margin: 0 auto 25px;
+      background: url("banner.jpg") center/cover no-repeat;
+      border-radius: 22px;
+      box-shadow: 0 0 45px rgba(255,159,28,.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .channel-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.75));
+    }
+
+    h1 {
+      font-family: 'Russo One', sans-serif;
+      font-size: 2.8rem;
+      color: var(--primary);
+      text-shadow: 0 0 18px rgba(255,159,28,.7);
+      margin-bottom: 10px;
+    }
+
+    .description {
+      max-width: 850px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: var(--muted);
+    }
+
+    /* ===== MENU ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(14,10,6,.92);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.5);
+    }
+
+    .menu-btn {
+      padding: 10px 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #000;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      opacity: .85;
+      transition: transform .2s, box-shadow .2s, opacity .2s;
+    }
+
+    .menu-btn.active,
+    .menu-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 20px rgba(255,159,28,.65);
+      opacity: 1;
+    }
+
+    /* ===== BUSCA GLOBAL ===== */
+    .search-box {
+      max-width: 600px;
+      margin: 35px auto 20px;
+      padding: 0 20px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 16px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: #20170f;
+      color: var(--text);
+      box-shadow: inset 0 0 12px rgba(0,0,0,.6);
+    }
+
+    .search-box input::placeholder { color: #bcae9d; }
+
+    section {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .category-title {
+      font-family: 'Russo One', sans-serif;
+      font-size: 1.8rem;
+      margin: 40px 0 20px;
+      color: var(--secondary);
+      text-shadow: 0 0 12px rgba(255,106,0,.4);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #1e140c, var(--card));
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 0 28px rgba(0,0,0,.7);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 38px rgba(255,159,28,.4);
+    }
+
+    .card h3 {
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .tags {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: .7rem;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: rgba(255,159,28,.2);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #000;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255,159,28,.6);
+    }
+
+    .main-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 80px auto;
+      flex-wrap: wrap;
+    }
+
+    .main-btn {
+      min-width: 240px;
+      padding: 18px 26px;
+      font-size: 1.15rem;
+      border-radius: 18px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow: 0 0 35px rgba(255,159,28,.5);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .main-btn.discord {
+      background: linear-gradient(135deg, #5865F2, #3c45a5);
+      color: #fff;
+    }
+
+    .main-btn:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 45px rgba(255,159,28,.75);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 15px;
+      font-size: .85rem;
+      opacity: .6;
+    }
+  </style></head>
+<body><header>
+  <div class="channel-banner"></div>
+  <h1>Nome do Seu Canal</h1>
+  <p class="description">
+    Filterscripts organizados por categoria para servidores SA-MP. Encontre rápido exatamente o que você precisa.
+  </p>
+</header><nav id="menu"></nav><div class="search-box">
+  <input type="text" id="search" placeholder="Pesquisar em todas as categorias..." />
+</div><section id="content"></section><section>
+  <div class="main-links">
+    <a href="#" class="main-btn">📺 Canal no YouTube</a>
+    <a href="#" class="main-btn discord">💬 Discord</a>
+  </div>
+</section><footer>
+  © 2026 - Filterscripts SA-MP | GitHub Pages
+</footer><script>
+  const data = {
+    "Organizações": [
+      {
+        name: "Sistema de Organizações",
+        desc: "Gerenciamento completo de organizações com ranks, permissões e salvamento.",
+        tags: ["RPG", "DOF2"],
+        links: [
+          { label: "MediaFire", url: "#" }
+        ]
+      }
+    ],
+    "Casas": [
+      {
+        name: "Sistema de Casas",
+        desc: "Compra, venda, interior, administração e impostos automáticos.",
+        tags: ["RPG"],
+        links: [
+          { label: "MediaFire", url: "#" }
+        ]
+      }
+    ],
+    "Utilidades": [
+      {
+        name: "Sistema de Login",
+        desc: "Registro e login simples com proteção básica.",
+        tags: ["Base", "Segurança"],
+        links: [
+          { label: "MediaFire", url: "#" }
+        ]
+      }
+    ]
+  };
+
+  const menu = document.getElementById('menu');
+  const content = document.getElementById('content');
+  const searchInput = document.getElementById('search');
+
+  function renderAll(filter = "") {
+    content.innerHTML = "";
+    let foundAny = false;
+
+    Object.entries(data).forEach(([category, items]) => {
+      const filtered = items.filter(item =>
+        item.name.toLowerCase().includes(filter) ||
+        item.desc.toLowerCase().includes(filter) ||
+        item.tags.join(' ').toLowerCase().includes(filter)
+      );
+
+      if (!filtered.length) return;
+
+      foundAny = true;
+
+      const title = document.createElement('h2');
+      title.className = 'category-title';
+      title.textContent = category;
+      content.appendChild(title);
+
+      const grid = document.createElement('div');
+      grid.className = 'cards';
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const tagsHTML = item.tags.map(t => `<span class=\"tag\">${t}</span>`).join('');
+        const linksHTML = item.links.map(l => `<a class=\"btn\" href=\"${l.url}\" target=\"_blank\">${l.label}</a>`).join('');
+
+        card.innerHTML = `
+          <h3>${item.name}</h3>
+          <p>${item.desc}</p>
+          <div class=\"tags\">${tagsHTML}</div>
+          <div class=\"links\">${linksHTML}</div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      content.appendChild(grid);
+    });
+
+    if (!foundAny) {
+      const msg = document.createElement('div');
+      msg.style.textAlign = 'center';
+      msg.style.margin = '80px 0';
+      msg.style.opacity = '.85';
+      msg.innerHTML = `
+        <h2 style=\"color: var(--primary); margin-bottom: 10px;\">Nada encontrado</h2>
+        <p style=\"color: var(--muted);\">Não encontramos nenhum sistema que corresponda à sua pesquisa.</p>
+      `;
+      content.appendChild(msg);
+    }
+  });
+
+      content.appendChild(grid);
+    });
+  }
+
+  Object.keys(data).forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'menu-btn';
+    btn.textContent = cat;
+    btn.onclick = () => {
+      document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      searchInput.value = '';
+      renderAll();
+      document.querySelector(`[data-cat='${cat}']`);
+    };
+    menu.appendChild(btn);
+  });
+
+  searchInput.addEventListener('input', e => {
+    renderAll(e.target.value.toLowerCase());
+  });
+
+  renderAll();
+</script></body>
+</html>
