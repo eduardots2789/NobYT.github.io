@@ -1,371 +1,216 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Filterscripts SA-MP</title>  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">  <style>
-    :root {
-      --bg: #0e0a06;
-      --card: #1a120a;
-      --primary: #ff9f1c;
-      --secondary: #ff6a00;
-      --accent: #ffd199;
-      --text: #f5f5f5;
-      --muted: #c2b8ad;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FS Scripts - Downloads</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0d0f14;
+            --card-bg: #161b22;
+            --accent-color: #007bff;
+            --discord-color: #5865F2;
+            --youtube-color: #FF0000;
+            --warning-color: #f39c12; /* Laranja solicitado */
+            --text-color: #ffffff;
+            --text-secondary: #8b949e;
+            --success-green: #238636;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    body {
-      background: radial-gradient(circle at top, #1b1208 0%, var(--bg) 65%);
-      color: var(--text);
-      font-family: 'Montserrat', sans-serif;
-      min-height: 100vh;
-    }
+        /* Cabeçalho */
+        .header-section {
+            width: 100%;
+            max-width: 850px;
+            text-align: center;
+            padding: 40px 20px 0;
+        }
 
-    header {
-      text-align: center;
-      padding: 60px 20px 40px;
-    }
+        .main-banner {
+            width: 100%;
+            max-height: 280px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 2px solid #30363d;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            margin-bottom: 20px;
+        }
 
-    .channel-banner {
-      max-width: 1000px;
-      height: 300px;
-      margin: 0 auto 25px;
-      background: url("banner.jpg") center/cover no-repeat;
-      border-radius: 22px;
-      box-shadow: 0 0 45px rgba(255,159,28,.35);
-      position: relative;
-      overflow: hidden;
-    }
+        .channel-name {
+            font-size: 3rem;
+            font-weight: 900;
+            margin: 10px 0;
+            background: linear-gradient(135deg, #fff 0%, #007bff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
 
-    .channel-banner::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent, rgba(0,0,0,.75));
-    }
+        .subtitle { color: var(--text-secondary); margin-bottom: 10px; font-size: 1.1rem; }
 
-    h1 {
-      font-family: 'Russo One', sans-serif;
-      font-size: 2.8rem;
-      color: var(--primary);
-      text-shadow: 0 0 18px rgba(255,159,28,.7);
-      margin-bottom: 10px;
-    }
+        /* Chamada de Downloads */
+        .highlight-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 40px 0 10px;
+            text-align: center;
+            letter-spacing: -1px;
+        }
 
-    .description {
-      max-width: 850px;
-      margin: 0 auto;
-      font-size: 1.05rem;
-      color: var(--muted);
-    }
+        .help-msg {
+            color: var(--warning-color);
+            font-weight: 700;
+            background: rgba(243, 156, 18, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px dashed var(--warning-color);
+            margin-bottom: 30px;
+            max-width: 650px;
+            text-align: center;
+            line-height: 1.5;
+        }
 
-    /* ===== MENU ===== */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(14,10,6,.92);
-      backdrop-filter: blur(6px);
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.5);
-    }
+        /* Lista de Scripts */
+        .scripts-container {
+            width: 90%;
+            max-width: 800px;
+            display: grid;
+            gap: 15px;
+            margin-bottom: 60px;
+        }
 
-    .menu-btn {
-      padding: 10px 18px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #000;
-      font-weight: 800;
-      cursor: pointer;
-      border: none;
-      opacity: .85;
-      transition: transform .2s, box-shadow .2s, opacity .2s;
-    }
+        .script-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #30363d;
+            transition: 0.3s;
+        }
 
-    .menu-btn.active,
-    .menu-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 20px rgba(255,159,28,.65);
-      opacity: 1;
-    }
+        .script-card:hover {
+            border-color: var(--accent-color);
+            transform: scale(1.02);
+        }
 
-    /* ===== BUSCA GLOBAL ===== */
-    .search-box {
-      max-width: 600px;
-      margin: 35px auto 20px;
-      padding: 0 20px;
-    }
+        .script-info h3 { margin: 0; font-size: 1.3rem; color: #58a6ff; }
+        .script-info p { margin: 5px 0 0; color: var(--text-secondary); font-size: 0.95rem; }
 
-    .search-box input {
-      width: 100%;
-      padding: 15px 18px;
-      border-radius: 16px;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      background: #20170f;
-      color: var(--text);
-      box-shadow: inset 0 0 12px rgba(0,0,0,.6);
-    }
+        .btn-download {
+            background: var(--success-green);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 800;
+            transition: 0.3s;
+        }
 
-    .search-box input::placeholder { color: #bcae9d; }
+        .btn-download:hover { background: #2ea043; box-shadow: 0 0 20px rgba(46, 160, 67, 0.4); }
 
-    section {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+        /* Seção Inferior: Dúvidas e Redes Sociais */
+        .footer-support {
+            width: 90%;
+            max-width: 800px;
+            background: #161826;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 50px;
+            border: 1px solid #2d3250;
+        }
 
-    .category-title {
-      font-family: 'Russo One', sans-serif;
-      font-size: 1.8rem;
-      margin: 40px 0 20px;
-      color: var(--secondary);
-      text-shadow: 0 0 12px rgba(255,106,0,.4);
-    }
+        .footer-support h2 { margin-top: 0; color: var(--accent-color); }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
 
-    .card {
-      background: linear-gradient(145deg, #1e140c, var(--card));
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 0 28px rgba(0,0,0,.7);
-      transition: transform .25s, box-shadow .25s;
-    }
+        .btn-social {
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
 
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 0 38px rgba(255,159,28,.4);
-    }
+        .btn-discord { background-color: var(--discord-color); }
+        .btn-youtube { background-color: var(--youtube-color); }
+        .btn-social:hover { opacity: 0.8; transform: translateY(-3px); }
 
-    .card h3 {
-      color: var(--primary);
-      margin-bottom: 8px;
-    }
+        .copyright { color: var(--text-secondary); font-size: 0.8rem; margin-top: 20px; }
+    </style>
+</head>
+<body>
 
-    .card p {
-      font-size: .95rem;
-      color: var(--muted);
-    }
+    <div class="header-section">
+        <img src="banner.jpg" alt="Banner do Canal" class="main-banner">
+        <h1 class="channel-name">NOME DO SEU CANAL</h1>
+        <p class="subtitle">Filterscripts gratuitos para servidores SAMP</p>
+    </div>
 
-    .tags {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    <h2 class="highlight-title">LINKS DIRETOS PELO MEDIAFIRE</h2>
+    
+    <div class="help-msg">
+        ⚠️ Para me ajudar, por favor, veja os anúncios, isso ajuda a manter o canal. <br>
+        Sua visualização garante que eu continue trazendo novos sistemas gratuitos!
+    </div>
 
-    .tag {
-      font-size: .7rem;
-      padding: 4px 8px;
-      border-radius: 8px;
-      background: rgba(255,159,28,.2);
-      color: var(--accent);
-      font-weight: 600;
-    }
+    <div class="scripts-container">
+        
+        <div class="script-card">
+            <div class="script-info">
+                <h3>Sistema de Concessionária</h3>
+                <p>Otimizado e fácil de instalar.</p>
+            </div>
+            <a href="LINK_DO_MEDIAFIRE" class="btn-download" target="_blank">DOWNLOAD</a>
+        </div>
 
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 15px;
-    }
+        <div class="script-card">
+            <div class="script-info">
+                <h3>Sistema de Registro</h3>
+                <p>Salvamento moderno para seu servidor.</p>
+            </div>
+            <a href="LINK_DO_MEDIAFIRE" class="btn-download" target="_blank">DOWNLOAD</a>
+        </div>
 
-    .btn {
-      text-decoration: none;
-      padding: 12px;
-      border-radius: 14px;
-      text-align: center;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #000;
-      transition: transform .2s, box-shadow .2s;
-    }
+    </div>
 
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255,159,28,.6);
-    }
+    <div class="footer-support">
+        <h2>Dúvidas ou Suporte?</h2>
+        <p>Se você encontrou algum bug ou precisa de ajuda com a instalação, entre em contato por uma das minhas redes oficiais abaixo:</p>
+        
+        <div class="social-buttons">
+            <a href="LINK_DO_DISCORD" class="btn-social btn-discord" target="_blank">Entrar no Discord</a>
+            <a href="LINK_DO_YOUTUBE" class="btn-social btn-youtube" target="_blank">Acessar o YouTube</a>
+        </div>
 
-    .main-links {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin: 80px auto;
-      flex-wrap: wrap;
-    }
+        <div class="copyright">
+            <p>© 2026 - Desenvolvido para a comunidade SAMP.</p>
+        </div>
+    </div>
 
-    .main-btn {
-      min-width: 240px;
-      padding: 18px 26px;
-      font-size: 1.15rem;
-      border-radius: 18px;
-      text-decoration: none;
-      color: #000;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      box-shadow: 0 0 35px rgba(255,159,28,.5);
-      transition: transform .25s, box-shadow .25s;
-    }
-
-    .main-btn.discord {
-      background: linear-gradient(135deg, #5865F2, #3c45a5);
-      color: #fff;
-    }
-
-    .main-btn:hover {
-      transform: scale(1.12);
-      box-shadow: 0 0 45px rgba(255,159,28,.75);
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 15px;
-      font-size: .85rem;
-      opacity: .6;
-    }
-  </style></head>
-<body><header>
-  <div class="channel-banner"></div>
-  <h1>NobYT</h1>
-  <p class="description">
-    Filterscripts e sistemas feitos por mim. Todos são link direto.
-  </p>
-</header><nav id="menu"></nav><div class="search-box">
-  <input type="text" id="search" placeholder="Pesquisar em todas as categorias..." />
-</div><section id="content"></section><section>
-  <div class="main-links">
-    <a href="#" class="main-btn">📺 YouTube</a>
-    <a href="#" class="main-btn discord">💬 Discord</a>
-  </div>
-</section><footer>
-  © 2026 - Filterscripts SA-MP | GitHub Pages
-</footer><script>
-  const data = {
-    "Organizações": [
-      {
-        name: "Sistema de Organizações",
-        desc: "Gerenciamento completo de organizações com ranks, permissões e salvamento.",
-        tags: ["RPG", "DOF2"],
-        links: [
-          { label: "MediaFire", url: "#" }
-        ]
-      }
-    ],
-    "Casas": [
-      {
-        name: "Sistema de Casas",
-        desc: "Compra, venda, interior, administração e impostos automáticos.",
-        tags: ["RPG"],
-        links: [
-          { label: "MediaFire", url: "#" }
-        ]
-      }
-    ],
-    "Utilidades": [
-      {
-        name: "Sistema de Login",
-        desc: "Registro e login simples com proteção básica.",
-        tags: ["Base", "Segurança"],
-        links: [
-          { label: "MediaFire", url: "#" }
-        ]
-      }
-    ]
-  };
-
-  const menu = document.getElementById('menu');
-  const content = document.getElementById('content');
-  const searchInput = document.getElementById('search');
-
-  function renderAll(filter = "") {
-    content.innerHTML = "";
-    let foundAny = false;
-
-    Object.entries(data).forEach(([category, items]) => {
-      const filtered = items.filter(item =>
-        item.name.toLowerCase().includes(filter) ||
-        item.desc.toLowerCase().includes(filter) ||
-        item.tags.join(' ').toLowerCase().includes(filter)
-      );
-
-      if (!filtered.length) return;
-
-      foundAny = true;
-
-      const title = document.createElement('h2');
-      title.className = 'category-title';
-      title.textContent = category;
-      content.appendChild(title);
-
-      const grid = document.createElement('div');
-      grid.className = 'cards';
-
-      filtered.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'card';
-
-        const tagsHTML = item.tags.map(t => `<span class=\"tag\">${t}</span>`).join('');
-        const linksHTML = item.links.map(l => `<a class=\"btn\" href=\"${l.url}\" target=\"_blank\">${l.label}</a>`).join('');
-
-        card.innerHTML = `
-          <h3>${item.name}</h3>
-          <p>${item.desc}</p>
-          <div class=\"tags\">${tagsHTML}</div>
-          <div class=\"links\">${linksHTML}</div>
-        `;
-
-        grid.appendChild(card);
-      });
-
-      content.appendChild(grid);
-    });
-
-    if (!foundAny) {
-      const msg = document.createElement('div');
-      msg.style.textAlign = 'center';
-      msg.style.margin = '80px 0';
-      msg.style.opacity = '.85';
-      msg.innerHTML = `
-        <h2 style=\"color: var(--primary); margin-bottom: 10px;\">Nada encontrado</h2>
-        <p style=\"color: var(--muted);\">Não encontramos nenhum sistema que corresponda à sua pesquisa.</p>
-      `;
-      content.appendChild(msg);
-    }
-  });
-
-      content.appendChild(grid);
-    });
-  }
-
-  Object.keys(data).forEach(cat => {
-    const btn = document.createElement('button');
-    btn.className = 'menu-btn';
-    btn.textContent = cat;
-    btn.onclick = () => {
-      document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      searchInput.value = '';
-      renderAll();
-      document.querySelector(`[data-cat='${cat}']`);
-    };
-    menu.appendChild(btn);
-  });
-
-  searchInput.addEventListener('input', e => {
-    renderAll(e.target.value.toLowerCase());
-  });
-
-  renderAll();
-</script></body>
+    </body>
 </html>
